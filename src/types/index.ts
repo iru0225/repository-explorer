@@ -32,3 +32,25 @@ export interface ButtonProps {
   label: string
   onClick: () => void
 }
+
+export interface CardComponentProps {
+  title: string
+  description: string
+  star: number
+}
+
+export interface TextComponentProps {
+  variant: 'normal' | 'grey' | 'bold'
+  label: string | number
+}
+
+export interface SearchComponentProps {
+  value: string
+  onChange: (event: React.ChangeEvent) => void
+  onClick: () => void
+}
+
+export interface AccordionProps {
+  label: string,
+  children: React.ReactNode
+}

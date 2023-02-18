@@ -1,12 +1,8 @@
-import { ReactNode, useEffect, useRef, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import ChevronDown from "../../../icons/chevron-down"
+import { AccordionProps } from "../../../types"
 import TextComponent from "../../atoms/text"
 import { AccordionContent, ChevronWrapper, Container, TitleWrapper } from "./styled"
-
-interface AccordionProps {
-  label: string,
-  children: ReactNode
-}
 
 const Accordion = ({ label, children }: AccordionProps) => {
   const elementRef = useRef<HTMLButtonElement | null>(null)
@@ -18,9 +14,7 @@ const Accordion = ({ label, children }: AccordionProps) => {
       const siblingElement = element.nextElementSibling
       const clickAway = (event: any) => {
         const elem = event.target;
-        if (!element.contains(elem) && !siblingElement?.contains(elem)) {
-          setIsOpen(() => false)
-        }
+        !element.contains(elem) && !siblingElement?.contains(elem) && setIsOpen(() => false)
       }
 
       document.addEventListener('click', clickAway)
@@ -34,9 +28,23 @@ const Accordion = ({ label, children }: AccordionProps) => {
     setIsOpen((prevState) => !prevState)
   }
 
+  const setStyle = (isOpen: boolean) => {
+    if (isOpen) {
+      return {
+          maxHeight: '300px',
+          overflow: 'auto'
+      }
+    }
+
+    return {
+      maxHeight: 0,
+      overflow: 'hidden'
+    }
+  }
+
   return(
     <>
-      <Container ref={elementRef} onClick={handleOnClick}>
+      <Container data-testid='accordion' ref={elementRef} onClick={handleOnClick}>
         <TitleWrapper>
           <TextComponent
             variant='normal'
@@ -47,7 +55,7 @@ const Accordion = ({ label, children }: AccordionProps) => {
           <ChevronDown />
         </ChevronWrapper>
       </Container>
-      <AccordionContent isOpen={isOpen}>
+      <AccordionContent data-testid='accordion-content' style={setStyle(isOpen)}>
         {children}
       </AccordionContent>
     </>

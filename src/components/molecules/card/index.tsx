@@ -1,12 +1,7 @@
 import StarIcon from "../../../icons/star-icon"
+import { CardComponentProps } from "../../../types"
 import TextComponent from "../../atoms/text"
 import { Container, ContentWrapper } from "./styled"
-
-interface CardComponentProps {
-  title: string
-  description: string
-  star: number
-}
 
 const CardComponent = ({title, description, star}: CardComponentProps) => {
   return(

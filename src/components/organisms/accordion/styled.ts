@@ -21,16 +21,12 @@ export const TitleWrapper = styled.div`
   margin: auto 0;
 `
 
-export const AccordionContent = styled.div<{ isOpen: boolean }>`
-  max-height: 0;
+export const AccordionContent = styled.div`
   display: flex;
   flex-direction: column;
   gap: 8px;
   margin-left: 16px;
   transition: max-height 0.2s ease-in-out;
-  overflow: hidden;
-
-  ${({ isOpen }) => isOpen && 'max-height: 300px; overflow-y: auto;'}
 
   div:first-child {
     margin-top: 8px;

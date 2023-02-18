@@ -22,4 +22,18 @@ describe('Button component', () => {
     const buttonComponent = screen.getByTestId(`${props.id}-button`)
     expect(buttonComponent).toBeInTheDocument()
   })
+
+  it('should have label same with label props', () => {
+    const props = {
+      id: 'some-id',
+      label: 'some-label',
+      onClick: () => null
+    }
+    renderComponent(props)
+    
+    const buttonComponent = screen.getByTestId(`${props.id}-button`)
+    const label = screen.getByText(`${props.label}`)
+    expect(buttonComponent).toBeInTheDocument()
+    expect(label).toBeInTheDocument()
+  })
 })

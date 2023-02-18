@@ -1,12 +1,7 @@
+import { SearchComponentProps } from "../../../types"
 import Button from "../../atoms/button"
 import Input from "../../atoms/input"
 import { Container } from "./styled"
-
-interface SearchComponentProps {
-  value: string
-  onChange: (event: React.ChangeEvent) => void
-  onClick: () => void
-}
 
 const SearchComponent = ({
   value,
