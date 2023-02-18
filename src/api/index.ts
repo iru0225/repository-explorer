@@ -22,7 +22,7 @@ export const getRepositories = async (user: string) => {
       [key: string]: any
     } = {}
     const result = await octokit.request('GET /users/{username}/repos', {
-      username: user.toLowerCase()
+      username: user
     })
     obj[user] = result.data
     console.log(obj);
