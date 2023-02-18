@@ -1,6 +1,4 @@
-// import { request } from "@octokit/request";
 import { Octokit } from "octokit";
-import { UserType } from "../types";
 
 const octokit = new Octokit({ auth: process.env.GITHUB_TOKEN})
 
@@ -24,7 +22,7 @@ export const getRepositories = async (user: string) => {
       [key: string]: any
     } = {}
     const result = await octokit.request('GET /users/{username}/repos', {
-      username: user
+      username: user.toLowerCase()
     })
     obj[user] = result.data
     console.log(obj);
