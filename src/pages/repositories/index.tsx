@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react"
+import TextComponent from "../../components/atoms/text"
 import CardComponent from "../../components/molecules/card"
 import SearchComponent from "../../components/molecules/search"
 import Accordion from "../../components/organisms/accordion"
@@ -41,22 +42,35 @@ const Repositories = () => {
         onClick={onClick}
       />
       <ContentWrapper>
-      {
-        Object.keys(reposData.repositories).map((key) => (
-          <Accordion key={key} label={key}>
-            {
-            reposData.repositories[key].map((data: any) => (
-                <CardComponent
-                  key={data.id}
-                  title={data.name}
-                  description={data.description}
-                  star={data.stargazers_count}
-                />
-              ))
-            }
-          </Accordion>
-        ))
-      }
+        {
+          reposData.search && <TextComponent
+          label={`Showing users for "${reposData.search}"`}
+          variant='grey'
+        />
+        }
+        {
+          Object.keys(reposData.repositories).map((key) => (
+            <Accordion key={key} label={key}>
+              {
+              reposData.repositories[key].map((data: any) => (
+                  <CardComponent
+                    key={data.id}
+                    title={data.name}
+                    description={data.description}
+                    star={data.stargazers_count}
+                  />
+                ))
+              }
+            </Accordion>
+          ))
+        } {
+          reposData.repositories.length < 1 && (
+            <TextComponent
+              label='Not Found'
+              variant='bold'
+            />
+          )
+        }
       </ContentWrapper>
     </Container>
   )
